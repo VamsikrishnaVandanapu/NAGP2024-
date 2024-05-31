@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-crud-h2-deployment
+spec:
+  selector:
+    matchLabels:
+      app: springboot-k8s-h2
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: springboot-k8s-h2
+    spec:
+      containers:
+        - name: springboot-crud-h2-k8s
+          image: vandanapuvamsi/springboot-crud-h2-k8s:1.0
+          resources:
+            limits:
+              cpu: 500m
+              memory: "300Mi"
+            requests:
+              cpu: 100m
+              memory: "200Mi"
+          ports:
+            - containerPort: 8080
+       
+
+---
+
+apiVersion: v1 # Kubernetes API version
+kind: Service # Kubernetes resource kind we are creating
+metadata: # Metadata of the resource kind we are creating
+  name: springboot-crud-h2-svc
+spec:
+  selector:
+    app: springboot-k8s-h2
+  ports:
+    - protocol: "TCP"
+      port: 8080 # The port that the service is running on in the cluster
+      targetPort: 8080 # The port exposed by the service
+      nodePort: 30300
+  type: NodePort # type of the service.
+  
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata: 
+  name: springboot-crud-h2-deployment-autoscale
+  labels:
+    app: springboot-k8s-h2
+spec: 
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: springboot-crud-h2-deployment
+  minReplicas: 1
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
+ 
+
