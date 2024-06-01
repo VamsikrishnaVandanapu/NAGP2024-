@@ -4,9 +4,9 @@ Docker url:
 	
 	
 Url for service APi's:
-		http://34.136.42.107:30300/api/courses/{id} - PUT
-		http://34.136.42.107:30300/api/courses -- GET
-		http://34.136.42.107:30300/api/courses -- post
+		http://34.42.11.181:30300/api/courses/{id} - PUT
+		http://34.42.11.181:30300/api/courses -- GET
+		http://34.42.11.181:30300/api/courses -- post
 		Post body 
 						{
 			"id":1,
@@ -18,9 +18,7 @@ Url for service APi's:
 			}
 			
 Url for Video recording: 
-	Apologies for disturbance in the video ,there is some construction work going on in the premises.
-
-	https://drive.google.com/drive/folders/1p_mdHiRHhUGFjmL2aEjkPEf2nmL34HTy?usp=sharing
+	https://drive.google.com/drive/folders/1p_mdHiRHhUGFjmL2aEjkPEf2nmL34HTy?usp=drive_link
 	
 	
 Url for git repository:
